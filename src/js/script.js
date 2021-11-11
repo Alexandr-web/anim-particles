@@ -5,12 +5,12 @@ class AnimateCanvas {
       ctx: canvas.getContext('2d'),
       width: window.innerWidth,
       height: window.innerHeight,
-      color: '#000'
+      color: '#181a1fff'
     };
     this.particle = {
       amount: 100,
       diameter: 2,
-      color: '#fefefe',
+      color: '#6e788fff',
       speed: 0.5
     }
     this.particles = [];
@@ -50,6 +50,24 @@ class AnimateCanvas {
         speedY: Math.random() * this.particle.speed
       });
     }
+  }
+
+  addParticle() {
+    this.canvas.el.addEventListener('click', e => {
+      const {
+        layerX: x,
+        layerY: y
+      } = e;
+
+      this.particles.push({
+        x,
+        y,
+        color: this.particle.color,
+        diameter: this.particle.diameter,
+        speedX: Math.random() * this.particle.speed,
+        speedY: Math.random() * this.particle.speed
+      });
+    });
   }
 
   updateCoordinates() {
@@ -124,6 +142,7 @@ class AnimateCanvas {
     this.setSizeByCanvas();
     this.setColorByCanvas();
     this.moveParticle();
+    this.addParticle();
   }
 }
 
